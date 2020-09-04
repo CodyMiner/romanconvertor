@@ -1,7 +1,7 @@
 def fromRoman(romanNumber)
-	myRomanNumber = romanNumber.dup
+    myRomanNumber = romanNumber.dup
 
-	singleLetterValues = {
+    singleLetterValues = {
         "I" => 1,
         "V" => 5,
         "X" => 10,
@@ -33,7 +33,7 @@ def fromRoman(romanNumber)
 end
 
 def toRoman(arabicNumber)
-	singleLetters = "IVXLCDM"
+    singleLetters = "IVXLCDM"
     singleLetterValues = {
         "I" => 1,
         "V" => 5,
