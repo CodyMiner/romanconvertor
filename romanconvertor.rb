@@ -1,9 +1,9 @@
 def fromRoman(romanNumber)
     # Replace the following line with the actual code!
-    raise NotImplementedError
+    return ""
 end
 
 def toRoman(arabicNumber)
     # Replace the following line with the actual code!
-    raise NotImplementedError
+    return ""
 end
