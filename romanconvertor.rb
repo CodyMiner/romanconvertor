@@ -9,24 +9,26 @@ def fromRoman(romanNumber)
         "M" => 1000
     }
 
-    # pairedLetterValues = {
-    # 	"IV" => 4,
-    # 	"IX" => 9,
-    # 	"XL" => 40,
-    # 	"XC" => 90,
-    # 	"CD" => 400,
-    # 	"CM" => 900
-    # }
+    pairedLetterValues = {
+    	"IV" => 4,
+    	"IX" => 9,
+    	"XL" => 40,
+    	"XC" => 90,
+    	"CD" => 400,
+    	"CM" => 900
+    }
 
     total = 0
 
-    # i = romanNumber.length - 2
-    # while i >= 0 do
-    # 	if i+1 < romanNumber.length and pairedLetterValues[romanNumber[i..i+1]] != nil
-    # 		total += 
-    # 	end
-    # 	i -= 1
-    # end
+    i = romanNumber.length - 2
+    while i >= 0 do
+    	pair = romanNumber[i..i+1]
+    	if i+1 < romanNumber.length and pairedLetterValues[pair] != nil
+    		total += pairedLetterValues[pair]
+    		romanNumber = romanNumber.chomp(pair)  
+    	end
+    	i -= 1
+    end
 
     j = romanNumber.length - 1
     while j >= 0 do
@@ -82,9 +84,7 @@ def toRoman(arabicNumber)
 end
 
 
-
-
-
+puts toRoman(490)
 
 
 
