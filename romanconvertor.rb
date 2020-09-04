@@ -1,4 +1,6 @@
 def fromRoman(romanNumber)
+	myRomanNumber = romanNumber.dup
+
 	singleLetterValues = {
         "I" => 1,
         "V" => 5,
@@ -9,53 +11,29 @@ def fromRoman(romanNumber)
         "M" => 1000
     }
 
-    pairedLetterValues = {
-    	"IV" => 4,
-    	"IX" => 9,
-    	"XL" => 40,
-    	"XC" => 90,
-    	"CD" => 400,
-    	"CM" => 900
-    }
+    myRomanNumber.sub! "CM", "DCCCC" #these are the only 6 subtraction pairs possible
+    myRomanNumber.sub! "CD", "CCCC"
+    myRomanNumber.sub! "XC", "LXXXX"
+    myRomanNumber.sub! "XL", "XXXX"
+    myRomanNumber.sub! "IX", "VIIII"
+    myRomanNumber.sub! "IV", "IIII"
 
     total = 0
-
-    i = romanNumber.length - 2
-    while i >= 0 do
-    	pair = romanNumber[i..i+1]
-    	if i+1 < romanNumber.length and pairedLetterValues[pair] != nil
-    		total += pairedLetterValues[pair]
-    		romanNumber = romanNumber.chomp(pair)  
-    	end
-    	i -= 1
-    end
-
-    j = romanNumber.length - 1
+    j = myRomanNumber.length - 1
     while j >= 0 do
-    	if not "IVXLCDM".include? romanNumber[j] 
+    	letter = myRomanNumber[j]
+    	if not "IVXLCDM".include? letter 
     		raise TypeError
     	end
-    	total += singleLetterValues[romanNumber[j]]
+    	total += singleLetterValues[letter]
     	j -= 1
     end
 
-    return total
-    
+    return total  
 end
 
 def toRoman(arabicNumber)
-	valueLetters = {
-        1 => "I",
-        5 => "V",
-        10 => "X",
-        50 => "L",
-        100 => "C",
-        500 => "D",
-        1000 => "M"
-    }
-
-    singleLetters = "IVXLCDM"
-
+	singleLetters = "IVXLCDM"
     singleLetterValues = {
         "I" => 1,
         "V" => 5,
@@ -79,20 +57,13 @@ def toRoman(arabicNumber)
     	arabicNumber = arabicNumber % value
     	i -= 1
     end
+
+    output.sub! "DCCCC", "CM"
+    output.sub! "CCCC",  "CD"
+    output.sub! "LXXXX", "XC"
+    output.sub! "XXXX",  "XL"
+    output.sub! "VIIII", "IX"
+    output.sub! "IIII",  "IV"
+
     return output
-
 end
-
-
-puts toRoman(490)
-
-
-
-
-
-
-
-
-
-
-
